@@ -6,13 +6,21 @@
         "dev": "astro dev",
         "build": "astro build",
         "preview": "astro preview",
-        "astro": "astro"
+        "check": "astro check",
+        "biome:check": "bunx biome check .",
+        "biome:format": "bunx biome format --write .",
+        "biome:fix": "bunx biome check --fix ."
     },
     "dependencies": {
+        "@astrojs/check": "^0.9.4",
         "@astrojs/mdx": "^4.3.7",
         "@astrojs/rss": "^4.0.12",
         "@astrojs/sitemap": "^3.6.0",
         "astro": "^5.14.6",
-        "sharp": "^0.34.3"
+        "sharp": "^0.34.3",
+        "typescript": "^5.9.3"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.6"
     }
 }
