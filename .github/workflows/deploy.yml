@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   workflow_run:
     branches: [main]
-    workflows: [Check]
+    workflows: [check]
     types: [completed]
 
 permissions:
@@ -13,7 +13,6 @@ permissions:
 
 jobs:
   build:
-    needs: check_prerequisites
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
