@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+import { PAGES } from "@lib/constants";
+
+const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || Astro.url.pathname;
+---
+
+<div id="navbar">
+    <div class="sticky w-full px-5 items-center flex bg-black h-16 z-40">
+        <svg
+            id="navbar-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 4v16M12 4v16M18 4v16"
+            />
+        </svg>
+        <h1 class="absolute self-center left-1/2 -translate-x-1/2 text-white font-extrabold">You are currently at <span class="current-page">{currentPage}</span></h1>
+    </div>
+    <!-- Fullscreen overlay container for Pixi navbar canvas; hidden by default -->
+    <div
+        id="navbar-canvas"
+        class="fixed left-0 right-0 top-16 bottom-0 z-30"
+    ></div>
+</div>
+
+<script>
+    import { Navbar } from "../scripts/navbar.ts";
+
+    const overlay = document.getElementById("navbar-canvas");
+    const icon = document.getElementById("navbar-icon");
+    const NAVBARS = new WeakMap();
+
+    function openOverlay() {
+        if (!overlay) return;
+        overlay.classList.add("open");
+        const currentPage = window.location.pathname;
+        Navbar.get(overlay).then((nav) => {
+            NAVBARS.set(overlay, nav);
+            nav.rebuild(currentPage);
+            nav.start();
+        });
+    }
+
+    function closeOverlay() {
+        if (!overlay) return;
+        overlay.classList.remove("open");
+        // Soft stop so next open restarts quickly
+        const nav = NAVBARS.get(overlay);
+        if (!nav) return;
+        nav.stop();
+    }
+
+    icon?.addEventListener("click", () => {
+        if (!overlay) return;
+        const isOpen = overlay.classList.contains("open");
+        if (!isOpen) openOverlay();
+        else closeOverlay();
+    });
+
+    // Optional: close overlay on Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeOverlay();
+    });
+</script>
