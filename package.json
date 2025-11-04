@@ -1,31 +1,32 @@
 {
-    "name": "celonymire-portfolio",
-    "type": "module",
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev",
-        "dev:host": "astro dev --host",
-        "build": "astro build",
-        "preview": "astro preview",
-        "check": "biome check && astro check",
-        "format": "bunx biome format --write .",
-        "fix": "bunx biome check --fix ."
-    },
-    "dependencies": {
-        "@astrojs/check": "0.9.5",
-        "@astrojs/mdx": "4.3.9",
-        "@astrojs/rss": "4.0.13",
-        "@astrojs/sitemap": "^3.6.0",
-        "@tailwindcss/vite": "^4.1.16",
-        "astro": "5.15.3",
-        "gsap": "^3.13.0",
-        "pixi-filters": "^6.1.4",
-        "pixi.js": "^8.14.0",
-        "sharp": "^0.34.4",
-        "tailwindcss": "^4.1.16",
-        "typescript": "^5.9.3"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "^2.3.3"
-    }
+	"name": "celonymire-portfolio",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"dev:host": "astro dev --host",
+		"build": "astro build",
+		"preview": "astro preview",
+		"check": "prettier --check . && astro check",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"@astrojs/check": "0.9.5",
+		"@astrojs/mdx": "4.3.9",
+		"@astrojs/rss": "4.0.13",
+		"@astrojs/sitemap": "^3.6.0",
+		"@tailwindcss/vite": "^4.1.16",
+		"astro": "5.15.3",
+		"gsap": "^3.13.0",
+		"pixi-filters": "^6.1.4",
+		"pixi.js": "^8.14.0",
+		"sharp": "^0.34.4",
+		"tailwindcss": "^4.1.16",
+		"typescript": "^5.9.3"
+	},
+	"devDependencies": {
+		"prettier": "^3.6.2",
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-tailwindcss": "^0.7.1"
+	}
 }
