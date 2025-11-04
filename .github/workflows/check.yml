@@ -24,8 +24,5 @@ jobs:
       - name: Install dependencies with Bun
         run: bun install
 
-      - name: Run Astro Check
-        run: bun run astro check
-
-      - name: Run Biome Check
-        run: bun run biome:check --reporter=github
+      - name: Check the project
+        run: bun run check --reporter=github
