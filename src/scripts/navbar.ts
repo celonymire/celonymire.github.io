@@ -129,13 +129,11 @@ function createPageNode(container: Container, pageIndex: number, vx: number, vy:
 }
 
 export class Navbar {
-	private static INSTANCES = new WeakMap<HTMLElement, Navbar>();
-
-	readonly root: HTMLElement;
-	readonly app: Application;
-	readonly container: Container;
+	private root: HTMLElement;
+	private app: Application;
+	private container: Container;
 	private ctx?: gsap.Context;
-	private tickerBound = false;
+	private resizeObserver?: ResizeObserver;
 
 	private constructor(root: HTMLElement, app: Application, container: Container) {
 		this.root = root;
@@ -143,34 +141,20 @@ export class Navbar {
 		this.container = container;
 	}
 
-	// Factory that reuses a single instance per root element
-	static async get(root: HTMLElement): Promise<Navbar> {
-		const existing = Navbar.INSTANCES.get(root);
-		if (existing) return existing;
-
+	static async create(root: HTMLElement): Promise<Navbar> {
 		const app = new Application();
 		await app.init({ resizeTo: root });
 		root.appendChild(app.canvas);
 
-		// One-time particle background layer
 		createParticleBackground(app);
 
-		// Main container for the web
 		const g = new Container();
 		app.stage.addChild(g);
 
-		const nav = new Navbar(root, app, g);
-		Navbar.INSTANCES.set(root, nav);
-
-		// Centering ticker (bind once)
-		if (!nav.tickerBound) {
-			app.ticker.add(() => {
-				g.position.set(app.canvas.width / 2, app.canvas.height / 2);
-			});
-			nav.tickerBound = true;
-		}
-
-		return nav;
+		const navbar = new Navbar(root, app, g);
+		navbar.updateCenter();
+		navbar.observeRootResize();
+		return navbar;
 	}
 
 	rebuild(currentPage?: string) {
@@ -196,6 +180,7 @@ export class Navbar {
 		this.app.stage.visible = true;
 		this.app.ticker.start();
 		this.app.renderer.resize(this.root.clientWidth, this.root.clientHeight);
+		this.updateCenter();
 	}
 
 	stop() {
@@ -210,6 +195,19 @@ export class Navbar {
 		if (this.app.canvas?.parentNode) {
 			this.app.canvas.remove();
 		}
-		Navbar.INSTANCES.delete(this.root);
+		if (this.resizeObserver) this.resizeObserver.disconnect();
+	}
+
+	private updateCenter() {
+		this.container.position.set(this.app.canvas.width / 2, this.app.canvas.height / 2);
+	}
+
+	private observeRootResize() {
+		if (this.resizeObserver) return;
+		this.resizeObserver = new ResizeObserver(() => {
+			this.app.renderer.resize(this.root.clientWidth, this.root.clientHeight);
+			this.updateCenter();
+		});
+		this.resizeObserver.observe(this.root);
 	}
 }

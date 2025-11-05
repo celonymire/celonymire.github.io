@@ -19,48 +19,78 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 			<path stroke-linecap="round" stroke-linejoin="round" d="M6 4v16M12 4v16M18 4v16"></path>
 		</svg>
 		<h1 class="absolute left-1/2 -translate-x-1/2 self-center font-extrabold text-white">
-			You are currently at <span class="current-page">{currentPage}</span>
+			You are currently at <span class="navbar-current-page">{currentPage}</span>
 		</h1>
 	</div>
-	<div id="navbar-canvas" class="fixed top-16 right-0 bottom-0 left-0 z-30"></div>
+	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-30"></div>
 </div>
 
 <script>
 	import { Navbar } from "../scripts/navbar.ts";
 
-	const overlay = document.getElementById("navbar-canvas");
-	const icon = document.getElementById("navbar-icon");
-	const NAVBARS = new WeakMap();
+	const overlay = document.getElementById("navbar-overlay")!;
+	const icon = document.getElementById("navbar-icon")!;
+
+	const navbar = await Navbar.create(overlay);
 
 	function openOverlay() {
-		if (!overlay) return;
-		overlay.classList.add("open");
+		overlay.classList.add("navbar-canvas-open");
+
 		const currentPage = window.location.pathname;
-		Navbar.get(overlay).then((nav) => {
-			NAVBARS.set(overlay, nav);
-			nav.rebuild(currentPage);
-			nav.start();
-		});
+		navbar.rebuild(currentPage);
+		navbar.start();
 	}
 
 	function closeOverlay() {
-		if (!overlay) return;
-		overlay.classList.remove("open");
-		// Soft stop so next open restarts quickly
-		const nav = NAVBARS.get(overlay);
-		if (!nav) return;
-		nav.stop();
+		overlay.classList.remove("navbar-canvas-open");
+		navbar.stop();
 	}
 
-	icon?.addEventListener("click", () => {
-		if (!overlay) return;
-		const isOpen = overlay.classList.contains("open");
+	icon.addEventListener("click", () => {
+		const isOpen = overlay.classList.contains("navbar-canvas-open");
 		if (!isOpen) openOverlay();
 		else closeOverlay();
 	});
-
-	// Optional: close overlay on Escape
-	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape") closeOverlay();
-	});
 </script>
+
+<style>
+	#navbar-overlay {
+		will-change: transform, opacity;
+		transform: translateY(-100%);
+		opacity: 0;
+		pointer-events: none;
+		transition:
+			transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+			opacity 200ms ease;
+	}
+
+	#navbar-overlay.navbar-canvas-open {
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.navbar-current-page {
+		background: linear-gradient(
+			90deg,
+			hsl(0 100% 50%) 0%,
+			hsl(60 100% 50%) 16.67%,
+			hsl(120 100% 50%) 33.33%,
+			hsl(180 100% 50%) 50%,
+			hsl(240 100% 50%) 66.67%,
+			hsl(300 100% 50%) 83.33%,
+			hsl(360 100% 50%) 100%
+		);
+		background-clip: text;
+		color: transparent;
+		filter: hue-rotate(0deg);
+		animation: rainbow-hue 2s linear infinite;
+		will-change: filter;
+	}
+
+	@keyframes rainbow-hue {
+		to {
+			filter: hue-rotate(360deg);
+		}
+	}
+</style>
