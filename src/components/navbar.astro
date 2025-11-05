@@ -26,7 +26,7 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 </div>
 
 <script>
-	import { Navbar } from "../scripts/navbar.ts";
+	import { Navbar } from "@scripts/navbar.ts";
 
 	const overlay = document.getElementById("navbar-overlay")!;
 	const icon = document.getElementById("navbar-icon")!;
