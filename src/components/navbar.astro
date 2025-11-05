@@ -25,33 +25,7 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-30"></div>
 </div>
 
-<script>
-	import { Navbar } from "@scripts/navbar.ts";
-
-	const overlay = document.getElementById("navbar-overlay")!;
-	const icon = document.getElementById("navbar-icon")!;
-
-	const navbar = await Navbar.create(overlay);
-
-	function openOverlay() {
-		overlay.classList.add("navbar-canvas-open");
-
-		const currentPage = window.location.pathname;
-		navbar.rebuild(currentPage);
-		navbar.start();
-	}
-
-	function closeOverlay() {
-		overlay.classList.remove("navbar-canvas-open");
-		navbar.stop();
-	}
-
-	icon.addEventListener("click", () => {
-		const isOpen = overlay.classList.contains("navbar-canvas-open");
-		if (!isOpen) openOverlay();
-		else closeOverlay();
-	});
-</script>
+<script src="../scripts/navbar.ts"></script>
 
 <style>
 	#navbar-overlay {

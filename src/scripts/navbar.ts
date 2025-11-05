@@ -160,17 +160,19 @@ export class Navbar {
 	rebuild(currentPage?: string) {
 		const page = currentPage ?? window.location.pathname;
 
-		// Kill previous animations and clear container
+		// Revert previous animations and clear container
 		if (this.ctx) this.ctx.revert();
 		this.container.removeChildren();
 
 		this.ctx = gsap.context(() => {
 			const rotGap = (2 * Math.PI) / PAGES.length;
 			createCobwebLayers(this.container, rotGap);
+
 			for (let i = 0; i < PAGES.length; i++) {
 				const angle = i * rotGap - Math.PI / 2;
 				const vx = Math.cos(angle) * PAGE_NODE_DIST;
 				const vy = Math.sin(angle) * PAGE_NODE_DIST;
+
 				createPageNode(this.container, i, vx, vy, page);
 			}
 		});
@@ -211,3 +213,28 @@ export class Navbar {
 		this.resizeObserver.observe(this.root);
 	}
 }
+
+(async () => {
+	const overlay = document.getElementById("navbar-overlay")!;
+	const icon = document.getElementById("navbar-icon")!;
+	let overlayOpen = false;
+
+	const navbar = await Navbar.create(overlay);
+
+	function openOverlay() {
+		overlay.classList.add("navbar-canvas-open");
+		navbar.rebuild(window.location.pathname);
+		navbar.start();
+	}
+
+	function closeOverlay() {
+		overlay.classList.remove("navbar-canvas-open");
+		navbar.stop();
+	}
+
+	icon.addEventListener("click", () => {
+		if (!overlayOpen) openOverlay();
+		else closeOverlay();
+		overlayOpen = !overlayOpen;
+	});
+})();
