@@ -3,6 +3,15 @@ import { PAGES } from "@lib/constants";
 import gsap from "gsap";
 import { Application, Container, Graphics, Text } from "pixi.js";
 
+interface Particle {
+	g: Graphics;
+	nx: number;
+	ny: number;
+	vx: number;
+	vy: number;
+	targetAlpha: number;
+}
+
 const NUM_LAYERS = 3;
 const PAGE_NODE_DIST = 300;
 
@@ -10,44 +19,62 @@ function createParticleBackground(app: Application, particleCount = 150) {
 	const particleContainer = new Container();
 	app.stage.addChild(particleContainer);
 
-	const particles: Array<{ graphic: Graphics; vx: number; vy: number; alpha: number; targetAlpha: number }> = [];
+	const particles: Particle[] = [];
 
+	const width = app.canvas.width;
+	const height = app.canvas.height;
 	for (let i = 0; i < particleCount; i++) {
-		const particle = new Graphics();
+		const g = new Graphics();
 		const size = Math.random() * 2 + 0.5;
-		particle.circle(0, 0, size).fill(0xffffff);
-		particle.position.set(Math.random() * app.canvas.width, Math.random() * app.canvas.height);
-		particle.alpha = Math.random() * 0.5 + 0.2;
+		g.circle(0, 0, size).fill(0xffffff);
 
-		particleContainer.addChild(particle);
+		// Normalized coordinates
+		const nx = Math.random();
+		const ny = Math.random();
+		const vx = (Math.random() - 0.5) * 0.001;
+		const vy = (Math.random() - 0.5) * 0.001;
+		const targetAlpha = Math.random() * 0.6 + 0.2;
+
+		g.position.set(nx * width, ny * height);
+		g.alpha = Math.random() * 0.5 + 0.2;
+
+		particleContainer.addChild(g);
 
 		particles.push({
-			graphic: particle,
-			vx: (Math.random() - 0.5) * 0.3,
-			vy: (Math.random() - 0.5) * 0.3,
-			alpha: particle.alpha,
-			targetAlpha: Math.random() * 0.6 + 0.2,
+			g,
+			nx,
+			ny,
+			vx,
+			vy,
+			targetAlpha,
 		});
 	}
 
-	// Animate particles
+	// Animate particles with normalized space mapping
 	app.ticker.add(() => {
-		particles.forEach((p) => {
-			p.graphic.x += p.vx;
-			p.graphic.y += p.vy;
+		const width = app.canvas.width;
+		const height = app.canvas.height;
 
-			// Wrap around screen edges
-			if (p.graphic.x < 0) p.graphic.x = app.canvas.width;
-			if (p.graphic.x > app.canvas.width) p.graphic.x = 0;
-			if (p.graphic.y < 0) p.graphic.y = app.canvas.height;
-			if (p.graphic.y > app.canvas.height) p.graphic.y = 0;
+		particles.forEach((p) => {
+			p.nx += p.vx;
+			p.ny += p.vy;
+
+			if (p.nx < 0) p.nx += 1;
+			if (p.nx > 1) p.nx -= 1;
+			if (p.ny < 0) p.ny += 1;
+			if (p.ny > 1) p.ny -= 1;
+
+			// Map to pixel coordinates every frame using current canvas size
+			p.g.x = p.nx * width;
+			p.g.y = p.ny * height;
 
 			// Subtle alpha pulsing
-			p.alpha += (p.targetAlpha - p.alpha) * 0.02;
-			if (Math.abs(p.targetAlpha - p.alpha) < 0.01) {
+			const alpha = p.g.alpha;
+			const newAlpha = alpha + (p.targetAlpha - alpha) * 0.02;
+			p.g.alpha = newAlpha;
+			if (Math.abs(p.targetAlpha - alpha) < 0.01) {
 				p.targetAlpha = Math.random() * 0.6 + 0.2;
 			}
-			p.graphic.alpha = p.alpha;
 		});
 	});
 
@@ -129,14 +156,11 @@ function createPageNode(container: Container, pageIndex: number, vx: number, vy:
 }
 
 export class Navbar {
-	private root: HTMLElement;
 	private app: Application;
 	private container: Container;
 	private ctx?: gsap.Context;
-	private resizeObserver?: ResizeObserver;
 
-	private constructor(root: HTMLElement, app: Application, container: Container) {
-		this.root = root;
+	private constructor(app: Application, container: Container) {
 		this.app = app;
 		this.container = container;
 	}
@@ -151,9 +175,8 @@ export class Navbar {
 		const g = new Container();
 		app.stage.addChild(g);
 
-		const navbar = new Navbar(root, app, g);
+		const navbar = new Navbar(app, g);
 		navbar.updateCenter();
-		navbar.observeRootResize();
 		return navbar;
 	}
 
@@ -181,7 +204,6 @@ export class Navbar {
 	start() {
 		this.app.stage.visible = true;
 		this.app.ticker.start();
-		this.app.renderer.resize(this.root.clientWidth, this.root.clientHeight);
 		this.updateCenter();
 	}
 
@@ -197,20 +219,10 @@ export class Navbar {
 		if (this.app.canvas?.parentNode) {
 			this.app.canvas.remove();
 		}
-		if (this.resizeObserver) this.resizeObserver.disconnect();
 	}
 
 	private updateCenter() {
 		this.container.position.set(this.app.canvas.width / 2, this.app.canvas.height / 2);
-	}
-
-	private observeRootResize() {
-		if (this.resizeObserver) return;
-		this.resizeObserver = new ResizeObserver(() => {
-			this.app.renderer.resize(this.root.clientWidth, this.root.clientHeight);
-			this.updateCenter();
-		});
-		this.resizeObserver.observe(this.root);
 	}
 }
 

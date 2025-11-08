@@ -2,6 +2,7 @@
 import "../styles/global.css";
 
 import Navbar from "@components/navbar.astro";
+import Footer from "@components/footer.astro";
 ---
 
 <!doctype html>
@@ -13,7 +14,78 @@ import Navbar from "@components/navbar.astro";
 	</head>
 	<body>
 		<Navbar />
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore et blanditiis quo velit illum sit ipsa quidem, est ipsam
-		odio magnam quod, aut quaerat impedit vel, eos dolor eveniet incidunt.
+		<div
+			id="avatar-cam-intro"
+			class="grid grid-cols-[1fr_1px_1fr] items-center justify-items-center gap-48 bg-black px-40 py-10"
+		>
+			<img src="/images/avatar-cams/GDMonster.png" alt="GD Monster Avatar" />
+			<div class="separator" aria-hidden="true"></div>
+			<div class="w-full self-center text-white">
+				<h1 class="mb-10 text-5xl font-extrabold">CREATE YOUR PERSONA</h1>
+				<p class="mb-10 text-xl/8 font-light tracking-wide">
+					Bring your content and online presence with personalized Avatar Cam to a new level. Avatar Cam utilizes 2D
+					art, bringing unique visual customization and interactivity to the table. Features to enhance interactivity
+					include animations, controller input, and <span class="highlight px-1.5 font-extrabold">NEW</span>
+					Twitch Integration!
+					<a href="https://forms.gle/qJoRmBMT5kUgffUBA" class="font-extrabold underline">Request a commission</a>
+					today!
+				</p>
+				<p class="text-xl tracking-wide">
+					Learn more about its features and showcases <a href="/avatar-cam" class="underline">here</a>
+				</p>
+			</div>
+		</div>
+		<Footer />
 	</body>
 </html>
+
+<style>
+	.highlight {
+		background: linear-gradient(230deg, gold, red);
+		background-clip: text;
+		color: transparent;
+		border: 2px solid;
+		border-image: linear-gradient(230deg, gold, red) 1;
+		display: inline-block;
+		line-height: 1;
+		padding-bottom: 4px;
+	}
+
+	#avatar-cam-intro {
+		position: relative;
+	}
+
+	#avatar-cam-intro::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		padding: 5px;
+		--period: 1000px; /* length of one full color cycle */
+		background: linear-gradient(90deg, goldenrod 0%, red 50%, goldenrod 100%);
+		background-size: var(--period) 100%;
+		background-repeat: repeat-x;
+		animation: move-gradient 1s linear infinite;
+		will-change: background-position;
+		mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		mask-composite: exclude;
+		pointer-events: none;
+	}
+
+	.separator {
+		width: 1px;
+		background: #ffffff;
+		height: 100%;
+		justify-self: center;
+	}
+
+	@keyframes move-gradient {
+		0% {
+			background-position: 0 50%;
+		}
+		100% {
+			background-position: var(--period) 50%;
+		}
+	}
+</style>
