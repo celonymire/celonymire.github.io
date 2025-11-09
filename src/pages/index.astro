@@ -7,32 +7,39 @@ import Footer from "@components/footer.astro";
 interface DSAItem {
 	name: string;
 	description: string;
+	link: string;
 }
 
 const DSA_COLLECTION: DSAItem[] = [
 	{
 		name: "Heavy-Light Decomposition",
 		description: "Update and query tree paths efficiently by decomposing the tree into heavy and light edges.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/range_query/heavy_light_decomposition.hpp",
 	},
 	{
 		name: "Lowest Common Ancestor",
 		description: "Special implementation of LCA with O(N) preprocessing and O(1) query time.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/graph/lowest_common_ancestor.hpp",
 	},
 	{
 		name: "Lazy Segment Tree",
 		description: "Efficient range update and queries, along with binary searching using iterative tree traversal.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/range_query/segment_tree_lazy.hpp",
 	},
 	{
 		name: "Aho-Corasick",
 		description: "Match multiple patterns in a text simultaneously with a trie automaton.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/string/aho_corasick.hpp",
 	},
 	{
 		name: "Rolling Hash",
 		description: "Quickly compute polynomial hashes of substrings.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/string/rolling_hash.hpp",
 	},
 	{
 		name: "Mo's Algorithm on Trees",
 		description: "Offline computation of path queries with Mo's algorithm adapted for trees.",
+		link: "https://github.com/celonymire/competitive-programming/blob/master/include/celony/graph/mo_tree.hpp",
 	},
 ];
 ---
@@ -46,9 +53,8 @@ const DSA_COLLECTION: DSAItem[] = [
 	</head>
 	<body>
 		<Navbar />
-		<div id="avatar-cam-intro" class="flex items-center gap-48 bg-black px-40 py-10">
-			<img src="/images/avatar-cams/GDMonster.png" alt="GD Monster Avatar" />
-			<div class="separator" aria-hidden="true"></div>
+		<div class="highlight-banner flex items-center gap-48 bg-black px-40 py-10">
+			<img id="avatar-cam-demo" src="/images/home/avatar-cams/Demo.gif" alt="Avatar Cam Demo" />
 			<div class="w-full self-center text-white">
 				<h1 class="mb-10 text-5xl font-extrabold">CREATE YOUR PERSONA</h1>
 				<p class="mb-10 text-xl/8 font-light tracking-wide">
@@ -65,24 +71,23 @@ const DSA_COLLECTION: DSAItem[] = [
 			</div>
 		</div>
 		<div id="dsa-collection" class="gap-48 bg-gray-800 px-40 py-10">
-			<h1 class="mb-10 text-center text-4xl font-extrabold text-white">Personal DSA Collection</h1>
-			<div id="dsa-carousel" class="mb-10">
-				<ul class="mb-4 flex flex-wrap justify-center gap-12 text-white">
-					{
-						DSA_COLLECTION.map((item) => (
-							<li class="dsa-item">
-								<h1 class="text-2xl font-extrabold">{item.name}</h1>
-								<p class="mt-2 text-sm leading-snug">{item.description}</p>
-							</li>
-						))
-					}
-					<li class="dsa-item-more inline-flex self-center">
-						<img src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000" alt="GitHub" />
-						<a class="text-2xl font-extrabold" href="https://github.com/celonymire/competitive-programming">AND MORE!</a
-						>
-					</li>
-				</ul>
-			</div>
+			<h1 class="mb-10 text-center text-5xl font-extrabold text-white">Personal DSA Collection</h1>
+			<ul class="mb-10 flex flex-wrap justify-center gap-12 text-white">
+				{
+					DSA_COLLECTION.map((item) => (
+						<li class="dsa-item">
+							<a class="text-xl font-extrabold" href={item.link}>
+								{item.name}
+							</a>
+							<p class="mt-2 text-sm leading-snug">{item.description}</p>
+						</li>
+					))
+				}
+				<li class="dsa-item-more inline-flex self-center">
+					<img src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000" alt="GitHub" />
+					<a class="text-2xl font-extrabold" href="https://github.com/celonymire/competitive-programming">AND MORE!</a>
+				</li>
+			</ul>
 			<div class="flex justify-evenly">
 				<div class="dsa-attribute">
 					<img src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000" alt="Axe" />
@@ -102,6 +107,20 @@ const DSA_COLLECTION: DSAItem[] = [
 				</div>
 			</div>
 		</div>
+		<div id="vscode-fastolympiccoding" class="flex items-center gap-48 bg-blue-950 px-40 py-10">
+			<img src="/images/home/demo.gif" alt="Fast Olympic Coding Demo" />
+			<div class="w-full self-center text-white">
+				<a class="mb-10 block text-4xl font-extrabold" href="https://github.com/celonymire/vscode-fastolympiccoding"
+					>VSCode + Fast Olympic Coding</a
+				>
+				<p class="text-xl font-light tracking-wide">
+					A VSCode extension to complement your setup. Straight forward to configure for any language, whether compiled
+					or interpreted. Packed with utilities including inserting library code without leaving the file, support for
+					Competitive Companion to quickly insert sample tests, and built-in stress tester for sanity checks. Great
+					extension to check out for VSCode users.
+				</p>
+			</div>
+		</div>
 	</body>
 	<Footer />
 </html>
@@ -118,11 +137,11 @@ const DSA_COLLECTION: DSAItem[] = [
 		padding-bottom: 4px;
 	}
 
-	#avatar-cam-intro {
+	.highlight-banner {
 		position: relative;
 	}
 
-	#avatar-cam-intro::before {
+	.highlight-banner::before {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -140,10 +159,10 @@ const DSA_COLLECTION: DSAItem[] = [
 		pointer-events: none;
 	}
 
-	.separator {
-		width: 2px;
-		background: #ffffff;
-		align-self: stretch;
+	#avatar-cam-demo {
+		width: 600px;
+		height: auto;
+		border-radius: 8px;
 	}
 
 	#dsa-collection {
@@ -169,9 +188,57 @@ const DSA_COLLECTION: DSAItem[] = [
 		z-index: 1;
 	}
 
+	#vscode-fastolympiccoding {
+		position: relative;
+		overflow: hidden;
+	}
+
+	#vscode-fastolympiccoding::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image:
+			repeating-linear-gradient(45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px),
+			repeating-linear-gradient(-45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px);
+		background-blend-mode: multiply;
+		opacity: 0.6;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	#vscode-fastolympiccoding > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	#vscode-fastolympiccoding img {
+		width: 600px;
+		height: auto;
+		border: 4px solid white;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	}
+
 	.dsa-item {
 		min-width: 200px;
 		max-width: 350px;
+		padding: 12px;
+		border-radius: 8px;
+		transition: background-color 0.25s ease;
+	}
+
+	.dsa-item:hover {
+		background-color: white;
+	}
+
+	.dsa-item a,
+	.dsa-item p {
+		transition: color 0.25s ease;
+	}
+
+	.dsa-item:hover a,
+	.dsa-item:hover p {
+		color: black;
 	}
 
 	.dsa-item-more {
