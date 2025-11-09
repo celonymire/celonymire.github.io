@@ -3,6 +3,38 @@ import "../styles/global.css";
 
 import Navbar from "@components/navbar.astro";
 import Footer from "@components/footer.astro";
+
+interface DSAItem {
+	name: string;
+	description: string;
+}
+
+const DSA_COLLECTION: DSAItem[] = [
+	{
+		name: "Heavy-Light Decomposition",
+		description: "Update and query tree paths efficiently by decomposing the tree into heavy and light edges.",
+	},
+	{
+		name: "Lowest Common Ancestor",
+		description: "Special implementation of LCA with O(N) preprocessing and O(1) query time.",
+	},
+	{
+		name: "Lazy Segment Tree",
+		description: "Efficient range update and queries, along with binary searching using iterative tree traversal.",
+	},
+	{
+		name: "Aho-Corasick",
+		description: "Match multiple patterns in a text simultaneously with a trie automaton.",
+	},
+	{
+		name: "Rolling Hash",
+		description: "Quickly compute polynomial hashes of substrings.",
+	},
+	{
+		name: "Mo's Algorithm on Trees",
+		description: "Offline computation of path queries with Mo's algorithm adapted for trees.",
+	},
+];
 ---
 
 <!doctype html>
@@ -32,8 +64,46 @@ import Footer from "@components/footer.astro";
 				</p>
 			</div>
 		</div>
-		<Footer />
+		<div id="dsa-collection" class="gap-48 bg-gray-800 px-40 py-10">
+			<h1 class="mb-10 text-center text-4xl font-extrabold text-white">Personal DSA Collection</h1>
+			<div id="dsa-carousel" class="mb-10">
+				<ul class="mb-4 flex flex-wrap justify-center gap-12 text-white">
+					{
+						DSA_COLLECTION.map((item) => (
+							<li class="dsa-item">
+								<h1 class="text-2xl font-extrabold">{item.name}</h1>
+								<p class="mt-2 text-sm leading-snug">{item.description}</p>
+							</li>
+						))
+					}
+					<li class="dsa-item-more inline-flex self-center">
+						<img src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000" alt="GitHub" />
+						<a class="text-2xl font-extrabold" href="https://github.com/celonymire/competitive-programming">AND MORE!</a
+						>
+					</li>
+				</ul>
+			</div>
+			<div class="flex justify-evenly">
+				<div class="dsa-attribute">
+					<img src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000" alt="Axe" />
+					<h1>Tested</h1>
+				</div>
+				<div class="dsa-attribute">
+					<img src="https://img.icons8.com/?size=100&id=QDgnZW9BLy1H&format=png&color=000000" alt="Scroll" />
+					<h1>Documented</h1>
+				</div>
+				<div class="dsa-attribute">
+					<img src="https://img.icons8.com/?size=100&id=YVToA9CPXtKW&format=png&color=000000" alt="Module" />
+					<h1>Modularized</h1>
+				</div>
+				<div class="dsa-attribute">
+					<img src="https://img.icons8.com/?size=100&id=iRpUJX5thBgS&format=png&color=000000" alt="Utility" />
+					<h1>Comprehensive</h1>
+				</div>
+			</div>
+		</div>
 	</body>
+	<Footer />
 </html>
 
 <style>
@@ -74,6 +144,65 @@ import Footer from "@components/footer.astro";
 		width: 2px;
 		background: #ffffff;
 		align-self: stretch;
+	}
+
+	#dsa-collection {
+		position: relative;
+		overflow: hidden;
+	}
+
+	#dsa-collection::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image:
+			repeating-linear-gradient(45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px),
+			repeating-linear-gradient(-45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px);
+		background-blend-mode: multiply;
+		opacity: 0.6;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	#dsa-collection > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.dsa-item {
+		min-width: 200px;
+		max-width: 350px;
+	}
+
+	.dsa-item-more {
+		background-color: white;
+		padding: 5px 10px;
+		font-size: 1.5rem;
+		color: black;
+	}
+
+	.dsa-item-more img {
+		width: 32px;
+		height: 32px;
+		margin-right: 10px;
+	}
+
+	.dsa-attribute {
+		display: flex;
+		align-self: center;
+	}
+
+	.dsa-attribute img {
+		width: 48px;
+		height: 48px;
+		margin-right: 10px;
+	}
+
+	.dsa-attribute h1 {
+		font-size: 2rem;
+		font-weight: bolder;
+		color: white;
+		align-self: center;
 	}
 
 	@keyframes move-gradient {
