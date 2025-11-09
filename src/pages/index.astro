@@ -14,10 +14,7 @@ import Footer from "@components/footer.astro";
 	</head>
 	<body>
 		<Navbar />
-		<div
-			id="avatar-cam-intro"
-			class="grid grid-cols-[1fr_1px_1fr] items-center justify-items-center gap-48 bg-black px-40 py-10"
-		>
+		<div id="avatar-cam-intro" class="flex items-center gap-48 bg-black px-40 py-10">
 			<img src="/images/avatar-cams/GDMonster.png" alt="GD Monster Avatar" />
 			<div class="separator" aria-hidden="true"></div>
 			<div class="w-full self-center text-white">
@@ -74,10 +71,9 @@ import Footer from "@components/footer.astro";
 	}
 
 	.separator {
-		width: 1px;
+		width: 2px;
 		background: #ffffff;
-		height: 100%;
-		justify-self: center;
+		align-self: stretch;
 	}
 
 	@keyframes move-gradient {
