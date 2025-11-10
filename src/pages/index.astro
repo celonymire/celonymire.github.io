@@ -10,6 +10,7 @@ interface DSAItem {
 	link: string;
 }
 
+const COMMISSION_URL = "https://forms.gle/qJoRmBMT5kUgffUBA";
 const DSA_COLLECTION: DSAItem[] = [
 	{
 		name: "Heavy-Light Decomposition",
@@ -53,8 +54,11 @@ const DSA_COLLECTION: DSAItem[] = [
 	</head>
 	<body>
 		<Navbar />
-		<div class="highlight-banner flex items-center gap-48 bg-black px-40 py-10">
-			<img id="avatar-cam-demo" src="/images/home/avatar-cams/Demo.gif" alt="Avatar Cam Demo" />
+		<div
+			id="avatar-cam"
+			class="relative flex items-center gap-48 overflow-hidden border-10 border-yellow-500 bg-black px-40 py-10"
+		>
+			<img class="h-auto w-[600px] rounded-lg" src="/images/home/avatar-cams/Demo.gif" alt="Avatar Cam Demo" />
 			<div class="w-full self-center text-white">
 				<h1 class="mb-10 text-5xl font-extrabold">CREATE YOUR PERSONA</h1>
 				<p class="mb-10 text-xl/8 font-light tracking-wide">
@@ -62,7 +66,7 @@ const DSA_COLLECTION: DSAItem[] = [
 					art, bringing unique visual customization and interactivity to the table. Features to enhance interactivity
 					include animations, controller input, and <span class="highlight px-1.5 font-extrabold">NEW</span>
 					Twitch Integration!
-					<a href="https://forms.gle/qJoRmBMT5kUgffUBA" class="font-extrabold underline">Request a commission</a>
+					<a href={COMMISSION_URL} class="font-extrabold underline">Request a commission</a>
 					today!
 				</p>
 				<p class="text-xl tracking-wide">
@@ -70,12 +74,12 @@ const DSA_COLLECTION: DSAItem[] = [
 				</p>
 			</div>
 		</div>
-		<div id="dsa-collection" class="gap-48 bg-gray-800 px-40 py-10">
+		<div id="dsa-collection" class="relative gap-48 overflow-hidden bg-gray-800 px-40 py-10">
 			<h1 class="mb-10 text-center text-5xl font-extrabold text-white">Personal DSA Collection</h1>
 			<ul class="mb-10 flex flex-wrap justify-center gap-12 text-white">
 				{
 					DSA_COLLECTION.map((item) => (
-						<li class="dsa-item">
+						<li class="dsa-item max-w-[350px] min-w-[200px] rounded-lg p-3 transition-colors duration-250 ease-in-out">
 							<a class="text-xl font-extrabold" href={item.link}>
 								{item.name}
 							</a>
@@ -83,32 +87,59 @@ const DSA_COLLECTION: DSAItem[] = [
 						</li>
 					))
 				}
-				<li class="dsa-item-more inline-flex self-center">
-					<img src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000" alt="GitHub" />
+				<li class="inline-flex self-center bg-white px-2.5 py-1.5 text-2xl font-extrabold text-black">
+					<img
+						class="mr-2.5 h-8 w-8"
+						src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000"
+						alt="GitHub"
+					/>
 					<a class="text-2xl font-extrabold" href="https://github.com/celonymire/competitive-programming">AND MORE!</a>
 				</li>
 			</ul>
 			<div class="flex justify-evenly">
-				<div class="dsa-attribute">
-					<img src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000" alt="Axe" />
-					<h1>Tested</h1>
+				<div class="flex self-center">
+					<img
+						class="mr-2.5 h-12 w-12"
+						src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000"
+						alt="Axe"
+					/>
+					<h1 class="self-center text-[2rem] font-extrabold text-white">Tested</h1>
 				</div>
-				<div class="dsa-attribute">
-					<img src="https://img.icons8.com/?size=100&id=QDgnZW9BLy1H&format=png&color=000000" alt="Scroll" />
-					<h1>Documented</h1>
+				<div class="flex self-center">
+					<img
+						class="mr-2.5 h-12 w-12"
+						src="https://img.icons8.com/?size=100&id=QDgnZW9BLy1H&format=png&color=000000"
+						alt="Scroll"
+					/>
+					<h1 class="self-center text-[2rem] font-extrabold text-white">Documented</h1>
 				</div>
-				<div class="dsa-attribute">
-					<img src="https://img.icons8.com/?size=100&id=YVToA9CPXtKW&format=png&color=000000" alt="Module" />
-					<h1>Modularized</h1>
+				<div class="flex self-center">
+					<img
+						class="mr-2.5 h-12 w-12"
+						src="https://img.icons8.com/?size=100&id=YVToA9CPXtKW&format=png&color=000000"
+						alt="Module"
+					/>
+					<h1 class="self-center text-[2rem] font-extrabold text-white">Modularized</h1>
 				</div>
-				<div class="dsa-attribute">
-					<img src="https://img.icons8.com/?size=100&id=iRpUJX5thBgS&format=png&color=000000" alt="Utility" />
-					<h1>Comprehensive</h1>
+				<div class="flex self-center">
+					<img
+						class="mr-2.5 h-12 w-12"
+						src="https://img.icons8.com/?size=100&id=iRpUJX5thBgS&format=png&color=000000"
+						alt="Utility"
+					/>
+					<h1 class="self-center text-[2rem] font-extrabold text-white">Comprehensive</h1>
 				</div>
 			</div>
 		</div>
-		<div id="vscode-fastolympiccoding" class="flex items-center gap-48 bg-blue-950 px-40 py-10">
-			<img src="/images/home/demo.gif" alt="Fast Olympic Coding Demo" />
+		<div
+			id="vscode-fastolympiccoding"
+			class="relative flex items-center gap-48 overflow-hidden bg-blue-950 px-40 py-10"
+		>
+			<img
+				class="h-auto w-[600px] rounded-lg border-4 border-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+				src="/images/home/demo.gif"
+				alt="Fast Olympic Coding Demo"
+			/>
 			<div class="w-full self-center text-white">
 				<a class="mb-10 block text-4xl font-extrabold" href="https://github.com/celonymire/vscode-fastolympiccoding"
 					>VSCode + Fast Olympic Coding</a
@@ -125,6 +156,70 @@ const DSA_COLLECTION: DSAItem[] = [
 	<Footer />
 </html>
 
+<script>
+	const avatarCamDiv = document.getElementById("avatar-cam")!;
+	const BORDER_WIDTH = 10;
+	const SPARKLE_SIDE_LENGTH = 60;
+
+	const createSparkle = () => {
+		const sparkle = document.createElement("img");
+		sparkle.src = "https://img.icons8.com/?size=100&id=qdQpy48X3Rjv&format=png&color=000000";
+		sparkle.classList.add("shiny-star");
+		sparkle.style.position = "absolute";
+		sparkle.style.width = `${SPARKLE_SIDE_LENGTH}px`;
+		sparkle.style.height = `${SPARKLE_SIDE_LENGTH}px`;
+		sparkle.style.pointerEvents = "none";
+		sparkle.style.zIndex = "500";
+		sparkle.style.animation = "fade-in 0.5s forwards, fade-out 0.5s 0.5s forwards";
+
+		return sparkle;
+	};
+	const addSparkle = () => {
+		const sparkle = createSparkle();
+		const width = avatarCamDiv.clientWidth;
+		const height = avatarCamDiv.clientHeight;
+
+		const side = Math.floor(Math.random() * 4);
+		let x, y;
+		switch (side) {
+			case 0: // top
+				x = BORDER_WIDTH + Math.random() * width - SPARKLE_SIDE_LENGTH / 2;
+				y = -BORDER_WIDTH - SPARKLE_SIDE_LENGTH / 2;
+				break;
+			case 1: // right
+				x = BORDER_WIDTH + width - BORDER_WIDTH / 2 - SPARKLE_SIDE_LENGTH / 2;
+				y = BORDER_WIDTH + Math.random() * height - SPARKLE_SIDE_LENGTH / 2;
+				break;
+			case 2: // bottom
+				x = BORDER_WIDTH + Math.random() * width - SPARKLE_SIDE_LENGTH / 2;
+				y = BORDER_WIDTH + height - SPARKLE_SIDE_LENGTH / 2;
+				break;
+			case 3: // left
+				x = -BORDER_WIDTH - SPARKLE_SIDE_LENGTH / 2;
+				y = BORDER_WIDTH + Math.random() * height - SPARKLE_SIDE_LENGTH / 2;
+				break;
+		}
+
+		sparkle.style.left = `${x}px`;
+		sparkle.style.top = `${y}px`;
+
+		avatarCamDiv.appendChild(sparkle);
+		setTimeout(() => {
+			avatarCamDiv.removeChild(sparkle);
+		}, 1000);
+	};
+
+	const sparkleWorker = new Worker("/scripts/interval-notifier-worker.js");
+	sparkleWorker.onmessage = (e) => {
+		if (e.data.type === "interval") {
+			addSparkle();
+		}
+	};
+	setTimeout(() => {
+		sparkleWorker.postMessage({ type: "start", data: { interval: 250 } });
+	}, 500);
+</script>
+
 <style>
 	.highlight {
 		background: linear-gradient(230deg, gold, red);
@@ -134,40 +229,7 @@ const DSA_COLLECTION: DSAItem[] = [
 		border-image: linear-gradient(230deg, gold, red) 1;
 		display: inline-block;
 		line-height: 1;
-		padding-bottom: 4px;
-	}
-
-	.highlight-banner {
-		position: relative;
-	}
-
-	.highlight-banner::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		padding: 5px;
-		--period: 1000px; /* length of one full color cycle */
-		background: linear-gradient(90deg, goldenrod 0%, red 50%, goldenrod 100%);
-		background-size: var(--period) 100%;
-		background-repeat: repeat-x;
-		animation: move-gradient 1s linear infinite;
-		will-change: background-position;
-		mask:
-			linear-gradient(#000 0 0) content-box,
-			linear-gradient(#000 0 0);
-		mask-composite: exclude;
-		pointer-events: none;
-	}
-
-	#avatar-cam-demo {
-		width: 600px;
-		height: auto;
-		border-radius: 8px;
-	}
-
-	#dsa-collection {
-		position: relative;
-		overflow: hidden;
+		padding-bottom: 3px;
 	}
 
 	#dsa-collection::before {
@@ -188,11 +250,6 @@ const DSA_COLLECTION: DSAItem[] = [
 		z-index: 1;
 	}
 
-	#vscode-fastolympiccoding {
-		position: relative;
-		overflow: hidden;
-	}
-
 	#vscode-fastolympiccoding::before {
 		content: "";
 		position: absolute;
@@ -211,22 +268,6 @@ const DSA_COLLECTION: DSAItem[] = [
 		z-index: 1;
 	}
 
-	#vscode-fastolympiccoding img {
-		width: 600px;
-		height: auto;
-		border: 4px solid white;
-		border-radius: 8px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	}
-
-	.dsa-item {
-		min-width: 200px;
-		max-width: 350px;
-		padding: 12px;
-		border-radius: 8px;
-		transition: background-color 0.25s ease;
-	}
-
 	.dsa-item:hover {
 		background-color: white;
 	}
@@ -241,43 +282,30 @@ const DSA_COLLECTION: DSAItem[] = [
 		color: black;
 	}
 
-	.dsa-item-more {
-		background-color: white;
-		padding: 5px 10px;
-		font-size: 1.5rem;
-		color: black;
-	}
-
-	.dsa-item-more img {
-		width: 32px;
-		height: 32px;
-		margin-right: 10px;
-	}
-
-	.dsa-attribute {
-		display: flex;
-		align-self: center;
-	}
-
-	.dsa-attribute img {
-		width: 48px;
-		height: 48px;
-		margin-right: 10px;
-	}
-
-	.dsa-attribute h1 {
-		font-size: 2rem;
-		font-weight: bolder;
-		color: white;
-		align-self: center;
-	}
-
 	@keyframes move-gradient {
 		0% {
 			background-position: 0 50%;
 		}
 		100% {
 			background-position: var(--period) 50%;
+		}
+	}
+
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade-out {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
 		}
 	}
 </style>
