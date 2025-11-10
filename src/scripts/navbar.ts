@@ -226,7 +226,7 @@ export class Navbar {
 	}
 }
 
-(async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	const overlay = document.getElementById("navbar-overlay")!;
 	const icon = document.getElementById("navbar-icon")!;
 	let overlayOpen = false;
@@ -249,4 +249,4 @@ export class Navbar {
 		else closeOverlay();
 		overlayOpen = !overlayOpen;
 	});
-})();
+});
