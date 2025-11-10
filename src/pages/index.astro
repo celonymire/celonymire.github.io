@@ -157,10 +157,11 @@ const DSA_COLLECTION: DSAItem[] = [
 </html>
 
 <script>
-	const avatarCamDiv = document.getElementById("avatar-cam")!;
 	const BORDER_WIDTH = 10;
 	const SPARKLE_SIDE_LENGTH = 60;
+	const FADE_SECONDS = 0.5;
 
+	const avatarCamDiv = document.getElementById("avatar-cam")!;
 	const createSparkle = () => {
 		const sparkle = document.createElement("img");
 		sparkle.src = "https://img.icons8.com/?size=100&id=qdQpy48X3Rjv&format=png&color=000000";
@@ -170,7 +171,7 @@ const DSA_COLLECTION: DSAItem[] = [
 		sparkle.style.height = `${SPARKLE_SIDE_LENGTH}px`;
 		sparkle.style.pointerEvents = "none";
 		sparkle.style.zIndex = "500";
-		sparkle.style.animation = "fade-in 0.5s forwards, fade-out 0.5s 0.5s forwards";
+		sparkle.style.animation = `fade-in ${FADE_SECONDS}s forwards, fade-out ${FADE_SECONDS}s ${FADE_SECONDS}s forwards`;
 
 		return sparkle;
 	};
