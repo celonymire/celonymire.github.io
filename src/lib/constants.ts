@@ -1,14 +1,14 @@
 export const PAGES = [
 	{
-		title: "Home",
+		title: "HOME",
 		link: "/",
 	},
 	{
-		title: "About",
+		title: "ABOUT",
 		link: "/about",
 	},
 	{
-		title: "Avatar Cam",
+		title: "AVATAR CAM",
 		link: "/avatar-cam",
 	},
 ] as const;

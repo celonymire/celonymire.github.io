@@ -19,7 +19,9 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 			<path stroke-linecap="round" stroke-linejoin="round" d="M6 4v16M12 4v16M18 4v16"></path>
 		</svg>
 		<h1 class="absolute left-1/2 -translate-x-1/2 self-center font-extrabold text-white">
-			You are currently at <span class="navbar-current-page">{currentPage}</span>
+			<span class="text-xl">You are currently at</span><span
+				class="ml-3 rounded-3xl bg-white px-3 py-1 text-lg text-black">{currentPage}</span
+			>
 		</h1>
 	</div>
 	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-9"></div>
@@ -42,24 +44,6 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 		transform: translateY(0);
 		opacity: 1;
 		pointer-events: auto;
-	}
-
-	.navbar-current-page {
-		background: linear-gradient(
-			90deg,
-			hsl(0 100% 50%) 0%,
-			hsl(60 100% 50%) 16.67%,
-			hsl(120 100% 50%) 33.33%,
-			hsl(180 100% 50%) 50%,
-			hsl(240 100% 50%) 66.67%,
-			hsl(300 100% 50%) 83.33%,
-			hsl(360 100% 50%) 100%
-		);
-		background-clip: text;
-		color: transparent;
-		filter: hue-rotate(0deg);
-		animation: rainbow-hue 2s linear infinite;
-		will-change: filter;
 	}
 
 	@keyframes rainbow-hue {
