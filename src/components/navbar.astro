@@ -22,7 +22,7 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 			You are currently at <span class="navbar-current-page">{currentPage}</span>
 		</h1>
 	</div>
-	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-30"></div>
+	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-9"></div>
 </div>
 
 <script src="../scripts/navbar.ts"></script>
