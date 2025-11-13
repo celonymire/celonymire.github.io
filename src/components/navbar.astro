@@ -5,8 +5,8 @@ import { PAGES } from "@lib/constants";
 const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || Astro.url.pathname;
 ---
 
-<div id="navbar">
-	<div class="sticky z-10 flex h-16 w-full items-center bg-black px-5">
+<div id="navbar" class="sticky top-0 z-10">
+	<div class="flex h-16 w-full items-center bg-black px-5">
 		<svg
 			id="navbar-icon"
 			xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,8 @@ const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || A
 			>
 		</h1>
 	</div>
-	<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-9"></div>
 </div>
+<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-9"></div>
 
 <script src="../scripts/navbar.ts"></script>
 
