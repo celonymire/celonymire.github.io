@@ -226,27 +226,28 @@ export class Navbar {
 	}
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-	const overlay = document.getElementById("navbar-overlay")!;
-	const icon = document.getElementById("navbar-icon")!;
-	let overlayOpen = false;
+// FIXME: Re-enable navbar overlay functionality for production once finalized
+// document.addEventListener("DOMContentLoaded", async () => {
+// 	const overlay = document.getElementById("navbar-overlay")!;
+// 	const icon = document.getElementById("navbar-icon")!;
+// 	let overlayOpen = false;
 
-	const navbar = await Navbar.create(overlay);
+// 	const navbar = await Navbar.create(overlay);
 
-	function openOverlay() {
-		overlay.classList.add("navbar-canvas-open");
-		navbar.rebuild(window.location.pathname);
-		navbar.start();
-	}
+// 	function openOverlay() {
+// 		overlay.classList.add("navbar-canvas-open");
+// 		navbar.rebuild(window.location.pathname);
+// 		navbar.start();
+// 	}
 
-	function closeOverlay() {
-		overlay.classList.remove("navbar-canvas-open");
-		navbar.stop();
-	}
+// 	function closeOverlay() {
+// 		overlay.classList.remove("navbar-canvas-open");
+// 		navbar.stop();
+// 	}
 
-	icon.addEventListener("click", () => {
-		if (!overlayOpen) openOverlay();
-		else closeOverlay();
-		overlayOpen = !overlayOpen;
-	});
-});
+// 	icon.addEventListener("click", () => {
+// 		if (!overlayOpen) openOverlay();
+// 		else closeOverlay();
+// 		overlayOpen = !overlayOpen;
+// 	});
+// });
