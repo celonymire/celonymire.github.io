@@ -53,115 +53,136 @@ const DSA_COLLECTION: DSAItem[] = [
 		<title>Sam Huang</title>
 	</head>
 	<body>
-		<Navbar />
-		<div id="short-intro">
-			<h1 class="mb-10 text-center text-5xl font-extrabold">Welcome!</h1>
-			<p class="text-center text-xl/8 font-light tracking-wide">
-				I am <span>Sam Huang</span>, and it is my pleasure to have you here! I love to explore new areas of technology,
-				with AI currently being the main focus towardsa brighter future. I love to make desktop applications, create
-				interactive websites, and solve any problems that come my way.
-			</p>
-		</div>
-		<div
-			id="avatar-cam"
-			class="relative flex items-center gap-48 overflow-hidden border-10 border-yellow-500 bg-black px-40 py-10"
-		>
-			<img class="h-auto w-[600px] rounded-lg" src="/images/home/avatar-cams/Demo.gif" alt="Avatar Cam Demo" />
-			<div class="w-full self-center text-white">
-				<h1 class="mb-10 text-5xl font-extrabold">CREATE YOUR PERSONA</h1>
-				<p class="mb-10 text-xl/8 font-light tracking-wide">
-					Bring your content and online presence with personalized Avatar Cam to a new level. Avatar Cam utilizes 2D
-					art, bringing unique visual customization and interactivity to the table. Features to enhance interactivity
-					include animations, controller input, and <span class="highlight px-1.5 font-extrabold">NEW</span>
-					Twitch Integration!
-					<a href={COMMISSION_URL} class="font-extrabold underline">Request a commission</a>
-					today!
+		<header>
+			<Navbar />
+		</header>
+		<main id="main-content">
+			<section id="short-intro" aria-labelledby="welcome-heading">
+				<h1 id="welcome-heading" class="mb-10 text-center text-5xl font-extrabold">Welcome!</h1>
+				<p class="text-center text-xl/8 font-light tracking-wide">
+					I am <span>Sam Huang</span>, and it is my pleasure to have you here! I love to explore new areas of
+					technology, with AI currently being the main focus towardsa brighter future. I love to make desktop
+					applications, create interactive websites, and solve any problems that come my way.
 				</p>
-				<p class="text-xl tracking-wide">
-					Learn more about its features and showcases <a href="/avatar-cam" class="underline">here</a>
-				</p>
-			</div>
-		</div>
-		<div id="dsa-collection" class="relative gap-48 overflow-hidden bg-gray-800 px-40 py-10">
-			<h1 class="mb-10 text-center text-5xl font-extrabold text-white">Personal DSA Collection</h1>
-			<ul class="mb-10 flex flex-wrap justify-center gap-12 text-white">
-				{
-					DSA_COLLECTION.map((item) => (
-						<li class="dsa-item max-w-[350px] min-w-[200px] rounded-lg p-3 transition-colors duration-250 ease-in-out">
-							<a class="text-xl font-extrabold" href={item.link}>
-								{item.name}
-							</a>
-							<p class="mt-2 text-sm leading-snug">{item.description}</p>
-						</li>
-					))
-				}
-				<li class="inline-flex self-center bg-white px-2.5 py-1.5 text-2xl font-extrabold text-black">
-					<img
-						class="mr-2.5 h-8 w-8"
-						src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000"
-						alt="GitHub"
-					/>
-					<a class="text-2xl font-extrabold" href="https://github.com/celonymire/competitive-programming">AND MORE!</a>
-				</li>
-			</ul>
-			<div class="flex justify-evenly">
-				<div class="flex self-center">
-					<img
-						class="mr-2.5 h-12 w-12"
-						src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000"
-						alt="Axe"
-					/>
-					<h1 class="self-center text-[2rem] font-extrabold text-white">Tested</h1>
+			</section>
+			<section
+				id="avatar-cam"
+				aria-labelledby="avatar-cam-heading"
+				class="relative flex items-center gap-48 overflow-hidden border-10 border-yellow-500 bg-black px-40 py-10"
+			>
+				<img
+					class="h-auto w-[600px] rounded-lg"
+					src="/images/home/avatar-cams/Demo.gif"
+					alt="Animated demo of Avatar Cam interface"
+				/>
+				<div class="w-full self-center text-white">
+					<h1 id="avatar-cam-heading" class="mb-10 text-5xl font-extrabold">CREATE YOUR PERSONA</h1>
+					<p class="mb-10 text-xl/8 font-light tracking-wide">
+						Bring your content and online presence with personalized Avatar Cam to a new level. Avatar Cam utilizes 2D
+						art, bringing unique visual customization and interactivity to the table. Features to enhance interactivity
+						include animations, controller input, and <span class="highlight px-1.5 font-extrabold">NEW</span>
+						Twitch Integration!
+						<a href={COMMISSION_URL} class="font-extrabold underline">Request a commission</a>
+						today!
+					</p>
+					<p class="text-xl tracking-wide">
+						Learn more about its features and showcases <a href="/avatar-cam" class="underline">here</a>
+					</p>
 				</div>
-				<div class="flex self-center">
-					<img
-						class="mr-2.5 h-12 w-12"
-						src="https://img.icons8.com/?size=100&id=QDgnZW9BLy1H&format=png&color=000000"
-						alt="Scroll"
-					/>
-					<h1 class="self-center text-[2rem] font-extrabold text-white">Documented</h1>
+			</section>
+			<section
+				id="dsa-collection"
+				aria-labelledby="dsa-heading"
+				class="relative gap-48 overflow-hidden bg-gray-800 px-40 py-10"
+			>
+				<h1 id="dsa-heading" class="mb-10 text-center text-5xl font-extrabold text-white">Personal DSA Collection</h1>
+				<ul class="mb-10 flex flex-wrap justify-center gap-12 text-white">
+					{
+						DSA_COLLECTION.map((item) => (
+							<li class="dsa-item max-w-[350px] min-w-[200px] rounded-lg p-3 transition-colors duration-250 ease-in-out">
+								<a class="text-xl font-extrabold" href={item.link} aria-label={item.name + " (DSA resource)"}>
+									{item.name}
+								</a>
+								<p class="mt-2 text-sm leading-snug">{item.description}</p>
+							</li>
+						))
+					}
+					<li class="inline-flex self-center bg-white px-2.5 py-1.5 text-2xl font-extrabold text-black">
+						<img
+							class="mr-2.5 h-8 w-8"
+							src="https://img.icons8.com/?size=100&id=12599&format=png&color=000000"
+							alt="GitHub logo"
+						/>
+						<a
+							class="text-2xl font-extrabold"
+							href="https://github.com/celonymire/competitive-programming"
+							aria-label="More DSA resources on GitHub">AND MORE!</a
+						>
+					</li>
+				</ul>
+				<div class="flex justify-evenly">
+					<div class="flex self-center">
+						<img
+							class="mr-2.5 h-12 w-12"
+							src="https://img.icons8.com/?size=100&id=iOFVfD3gi7w6&format=png&color=000000"
+							alt="Axe icon representing tested code"
+						/>
+						<h1 class="self-center text-[2rem] font-extrabold text-white">Tested</h1>
+					</div>
+					<div class="flex self-center">
+						<img
+							class="mr-2.5 h-12 w-12"
+							src="https://img.icons8.com/?size=100&id=QDgnZW9BLy1H&format=png&color=000000"
+							alt="Scroll icon representing documentation"
+						/>
+						<h1 class="self-center text-[2rem] font-extrabold text-white">Documented</h1>
+					</div>
+					<div class="flex self-center">
+						<img
+							class="mr-2.5 h-12 w-12"
+							src="https://img.icons8.com/?size=100&id=YVToA9CPXtKW&format=png&color=000000"
+							alt="Module icon representing modularized code"
+						/>
+						<h1 class="self-center text-[2rem] font-extrabold text-white">Modularized</h1>
+					</div>
+					<div class="flex self-center">
+						<img
+							class="mr-2.5 h-12 w-12"
+							src="https://img.icons8.com/?size=100&id=iRpUJX5thBgS&format=png&color=000000"
+							alt="Utility icon representing comprehensive code"
+						/>
+						<h1 class="self-center text-[2rem] font-extrabold text-white">Comprehensive</h1>
+					</div>
 				</div>
-				<div class="flex self-center">
-					<img
-						class="mr-2.5 h-12 w-12"
-						src="https://img.icons8.com/?size=100&id=YVToA9CPXtKW&format=png&color=000000"
-						alt="Module"
-					/>
-					<h1 class="self-center text-[2rem] font-extrabold text-white">Modularized</h1>
+			</section>
+			<section
+				id="vscode-fastolympiccoding"
+				aria-labelledby="vscode-fastolympiccoding-heading"
+				class="relative flex items-center gap-48 overflow-hidden bg-blue-950 px-40 py-10"
+			>
+				<img
+					class="h-auto w-[600px] rounded-lg border-4 border-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+					src="/images/home/demo.gif"
+					alt="Animated demo of Fast Olympic Coding extension in VSCode"
+				/>
+				<div class="w-full self-center text-white">
+					<a
+						id="vscode-fastolympiccoding-heading"
+						class="mb-10 block text-4xl font-extrabold"
+						href="https://github.com/celonymire/vscode-fastolympiccoding"
+						aria-label="VSCode Fast Olympic Coding extension on GitHub">VSCode + Fast Olympic Coding</a
+					>
+					<p class="text-xl font-light tracking-wide">
+						A VSCode extension to complement your setup. Straight forward to configure for any language, whether
+						compiled or interpreted. Packed with utilities including inserting library code without leaving the file,
+						support for Competitive Companion to quickly insert sample tests, and built-in stress tester for sanity
+						checks. Great extension to check out for VSCode users.
+					</p>
 				</div>
-				<div class="flex self-center">
-					<img
-						class="mr-2.5 h-12 w-12"
-						src="https://img.icons8.com/?size=100&id=iRpUJX5thBgS&format=png&color=000000"
-						alt="Utility"
-					/>
-					<h1 class="self-center text-[2rem] font-extrabold text-white">Comprehensive</h1>
-				</div>
-			</div>
-		</div>
-		<div
-			id="vscode-fastolympiccoding"
-			class="relative flex items-center gap-48 overflow-hidden bg-blue-950 px-40 py-10"
-		>
-			<img
-				class="h-auto w-[600px] rounded-lg border-4 border-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
-				src="/images/home/demo.gif"
-				alt="Fast Olympic Coding Demo"
-			/>
-			<div class="w-full self-center text-white">
-				<a class="mb-10 block text-4xl font-extrabold" href="https://github.com/celonymire/vscode-fastolympiccoding"
-					>VSCode + Fast Olympic Coding</a
-				>
-				<p class="text-xl font-light tracking-wide">
-					A VSCode extension to complement your setup. Straight forward to configure for any language, whether compiled
-					or interpreted. Packed with utilities including inserting library code without leaving the file, support for
-					Competitive Companion to quickly insert sample tests, and built-in stress tester for sanity checks. Great
-					extension to check out for VSCode users.
-				</p>
-			</div>
-		</div>
+			</section>
+		</main>
+		<Footer />
 	</body>
-	<Footer />
 </html>
 
 <script>
