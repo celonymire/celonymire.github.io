@@ -5,50 +5,30 @@ import { PAGES } from "@lib/constants";
 const currentPage = PAGES.find((p) => p.link === Astro.url.pathname)?.title || Astro.url.pathname;
 ---
 
-<div id="navbar" class="sticky top-0 z-10">
-	<div class="flex h-16 w-full items-center bg-black px-5">
-		<svg
-			id="navbar-icon"
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-8 w-8 text-white"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			stroke-width="2"
-		>
-			<path stroke-linecap="round" stroke-linejoin="round" d="M6 4v16M12 4v16M18 4v16"></path>
-		</svg>
-		<h1 class="absolute left-1/2 -translate-x-1/2 self-center font-extrabold text-white">
+<header id="navbar" class="sticky top-0 z-10 flex bg-black px-5">
+	<div class="flex h-16 flex-1 justify-center">
+		<h1 class="self-center font-extrabold text-white">
 			<span class="text-xl">You are currently at</span><span
 				class="ml-3 rounded-3xl bg-white px-3 py-1 text-lg text-black">{currentPage}</span
 			>
 		</h1>
 	</div>
-</div>
-<div id="navbar-overlay" class="fixed top-16 right-0 bottom-0 left-0 z-9"></div>
-
-<script src="../scripts/navbar-overlay.ts"></script>
+	<div class="flex h-16 flex-1 justify-center text-xl font-extrabold">
+		<div class="flex gap-6 self-center px-5 py-2">
+			<a class="navbar-link rounded-lg border-2 border-white px-3 py-1 text-white">About (UPCOMING)</a>
+			<a class="navbar-link rounded-lg border-2 border-white px-3 py-1 text-white">Avatar Cam (UPCOMING)</a>
+		</div>
+	</div>
+</header>
 
 <style>
-	#navbar-overlay {
-		will-change: transform, opacity;
-		transform: translateY(-100%);
-		opacity: 0;
-		pointer-events: none;
+	.navbar-link {
 		transition:
-			transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
-			opacity 200ms ease;
+			background-color 0.25s ease,
+			color 0.25s ease;
 	}
-
-	#navbar-overlay.navbar-canvas-open {
-		transform: translateY(0);
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	@keyframes rainbow-hue {
-		to {
-			filter: hue-rotate(360deg);
-		}
+	.navbar-link:hover {
+		background-color: white;
+		color: black;
 	}
 </style>
