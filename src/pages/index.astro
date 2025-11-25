@@ -50,6 +50,12 @@ const DSA_COLLECTION = [
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			rel="preload"
+			href="https://img.icons8.com/?size=100&id=qdQpy48X3Rjv&format=png&color=000000"
+			as="image"
+			crossorigin
+		/>
 		<title>Sam Huang</title>
 	</head>
 	<body>
@@ -183,70 +189,7 @@ const DSA_COLLECTION = [
 	</body>
 </html>
 
-<script>
-	const BORDER_WIDTH = 10;
-	const SPARKLE_SIDE_LENGTH = 60;
-	const FADE_SECONDS = 0.5;
-
-	const avatarCamDiv = document.getElementById("avatar-cam")!;
-	const createSparkle = () => {
-		const sparkle = document.createElement("img");
-		sparkle.src = "https://img.icons8.com/?size=100&id=qdQpy48X3Rjv&format=png&color=000000";
-		sparkle.classList.add("shiny-star");
-		sparkle.style.position = "absolute";
-		sparkle.style.width = `${SPARKLE_SIDE_LENGTH}px`;
-		sparkle.style.height = `${SPARKLE_SIDE_LENGTH}px`;
-		sparkle.style.pointerEvents = "none";
-		sparkle.style.zIndex = "2";
-		sparkle.style.animation = `fade-in ${FADE_SECONDS}s forwards, fade-out ${FADE_SECONDS}s ${FADE_SECONDS}s forwards`;
-
-		return sparkle;
-	};
-	const addSparkle = () => {
-		const sparkle = createSparkle();
-		const width = avatarCamDiv.clientWidth;
-		const height = avatarCamDiv.clientHeight;
-
-		const side = Math.floor(Math.random() * 4);
-		let x, y;
-		switch (side) {
-			case 0: // top
-				x = BORDER_WIDTH + Math.random() * width - SPARKLE_SIDE_LENGTH / 2;
-				y = -BORDER_WIDTH - SPARKLE_SIDE_LENGTH / 2;
-				break;
-			case 1: // right
-				x = BORDER_WIDTH + width - BORDER_WIDTH / 2 - SPARKLE_SIDE_LENGTH / 2;
-				y = BORDER_WIDTH + Math.random() * height - SPARKLE_SIDE_LENGTH / 2;
-				break;
-			case 2: // bottom
-				x = BORDER_WIDTH + Math.random() * width - SPARKLE_SIDE_LENGTH / 2;
-				y = BORDER_WIDTH + height - SPARKLE_SIDE_LENGTH / 2;
-				break;
-			case 3: // left
-				x = -BORDER_WIDTH - SPARKLE_SIDE_LENGTH / 2;
-				y = BORDER_WIDTH + Math.random() * height - SPARKLE_SIDE_LENGTH / 2;
-				break;
-		}
-
-		sparkle.style.left = `${x}px`;
-		sparkle.style.top = `${y}px`;
-
-		avatarCamDiv.appendChild(sparkle);
-		setTimeout(() => {
-			avatarCamDiv.removeChild(sparkle);
-		}, 1000);
-	};
-
-	const sparkleWorker = new Worker("/scripts/interval-notifier-worker.js");
-	sparkleWorker.onmessage = (e) => {
-		if (e.data.type === "interval") {
-			addSparkle();
-		}
-	};
-	setTimeout(() => {
-		sparkleWorker.postMessage({ type: "start", data: { interval: 250 } });
-	}, 500);
-</script>
+<script type="module" src="/scripts/sparkle-pool.js"></script>
 
 <style>
 	/* Page-scoped CSS (moved here to keep a single style block in the page) */
@@ -263,6 +206,22 @@ const DSA_COLLECTION = [
 		color: #e5e7eb;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Sparkle optimization: pool elements should be GPU composited and won't trigger reflow */
+	.shiny-star {
+		position: absolute;
+		pointer-events: none;
+		will-change: transform, opacity;
+		transform: translate3d(-9999px, -9999px, 0);
+		opacity: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.shiny-star {
+			display: none !important;
+			animation: none !important;
+		}
 	}
 
 	/* Headings in this page use the heading font */
