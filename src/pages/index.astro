@@ -4,14 +4,8 @@ import "../styles/global.css";
 import Navbar from "@components/navbar.astro";
 import Footer from "@components/footer.astro";
 
-interface DSAItem {
-	name: string;
-	description: string;
-	link: string;
-}
-
 const COMMISSION_URL = "https://forms.gle/qJoRmBMT5kUgffUBA";
-const DSA_COLLECTION: DSAItem[] = [
+const DSA_COLLECTION = [
 	{
 		name: "Heavy-Light Decomposition",
 		description: "Update and query tree paths efficiently by decomposing the tree into heavy and light edges.",
@@ -50,6 +44,12 @@ const DSA_COLLECTION: DSAItem[] = [
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Sam Huang</title>
 	</head>
 	<body>
@@ -59,8 +59,8 @@ const DSA_COLLECTION: DSAItem[] = [
 				<h1 id="welcome-heading" class="mb-10 text-center text-5xl font-extrabold">Welcome!</h1>
 				<p class="text-center text-xl/8 font-light tracking-wide">
 					I am <span>Sam Huang</span>, and it is my pleasure to have you here! I love to explore new areas of
-					technology, with AI currently being the main focus towardsa brighter future. I love to make desktop
-					applications, create interactive websites, and solve any problems that come my way.
+					technology, with AI currently being the main focus towards a brighter future. I also love creating desktop
+					applications, interactive websites, and solving any problems that come my way.
 				</p>
 			</section>
 			<section
@@ -78,13 +78,13 @@ const DSA_COLLECTION: DSAItem[] = [
 					<p class="mb-10 text-xl/8 font-light tracking-wide">
 						Bring your content and online presence with personalized Avatar Cam to a new level. Avatar Cam utilizes 2D
 						art, bringing unique visual customization and interactivity to the table. Features to enhance interactivity
-						include animations, controller input, and <span class="highlight px-1.5 font-extrabold">NEW</span>
+						include animations, controller input, and <span class="new-emphasis">NEW</span>
 						Twitch Integration!
 						<a href={COMMISSION_URL} class="font-extrabold underline">Request a commission</a>
 						today!
 					</p>
 					<p class="text-xl tracking-wide">
-						Learn more about its features and showcases <a href="/avatar-cam" class="underline">here</a>
+						Learn more about its features and showcases <a href="/avatar-cam" class="underline">here</a>!
 					</p>
 				</div>
 			</section>
@@ -249,15 +249,67 @@ const DSA_COLLECTION: DSAItem[] = [
 </script>
 
 <style>
-	.highlight {
-		background: linear-gradient(230deg, gold, red);
+	/* Page-scoped CSS (moved here to keep a single style block in the page) */
+	/* Scope variables and base font settings to the main content container */
+	#main-content {
+		--font-sans:
+			"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+		--font-heading: "Poppins", var(--font-sans);
+		--max-read-width: 60ch;
+		font-family: var(--font-sans);
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 1.5;
+		color: #e5e7eb;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Headings in this page use the heading font */
+	#main-content h1,
+	#main-content h2,
+	#main-content h3,
+	#main-content h4,
+	#main-content h5,
+	#main-content h6,
+	#main-content .font-extrabold {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		letter-spacing: -0.01em;
+	}
+
+	/* Short paragraph / blurb --- only apply to short blurbs and DSA list descriptions */
+	#main-content .short-desc,
+	#main-content .dsa-item p {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		max-width: var(--max-read-width);
+		color: inherit;
+	}
+
+	/* Utility to force heading font only within this page */
+	#main-content .font-heading {
+		font-family: var(--font-heading) !important;
+	}
+
+	.new-emphasis {
+		/* Gradient text with a matching border and small padding. */
+		background: linear-gradient(230deg, #f6e05e 0%, #ef4444 100%);
+		-webkit-background-clip: text;
 		background-clip: text;
 		color: transparent;
+		-webkit-text-fill-color: transparent;
 		border: 2px solid;
-		border-image: linear-gradient(230deg, gold, red) 1;
+		border-image: linear-gradient(230deg, #f6e05e, #ef4444) 1;
 		display: inline-block;
 		line-height: 1;
+		padding-left: 0.375rem; /* px-1.5 */
+		padding-right: 0.375rem;
+		padding-top: 3px; /* py-[3px] */
 		padding-bottom: 3px;
+		font-weight: 800; /* font-extrabold */
 	}
 
 	#dsa-collection::before {
@@ -296,17 +348,18 @@ const DSA_COLLECTION: DSAItem[] = [
 		z-index: 1;
 	}
 
-	.dsa-item:hover {
+	/* DSA item hover and transitions — scoped and specific so it overrides page-level rules */
+	#main-content .dsa-item:hover {
 		background-color: white;
 	}
 
-	.dsa-item a,
-	.dsa-item p {
+	#main-content .dsa-item a,
+	#main-content .dsa-item p {
 		transition: color 0.25s ease;
 	}
 
-	.dsa-item:hover a,
-	.dsa-item:hover p {
+	#main-content .dsa-item:hover a,
+	#main-content .dsa-item:hover p {
 		color: black;
 	}
 
