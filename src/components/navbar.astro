@@ -2,7 +2,11 @@
 import "../styles/global.css";
 import { PAGES } from "@lib/constants";
 
-const currentPageTitle = PAGES.find((p) => p.link === Astro.url.pathname)?.title || Astro.url.pathname;
+interface Props {
+	currentPageTitle: string;
+}
+
+const { currentPageTitle } = Astro.props;
 ---
 
 <header id="navbar" class="sticky top-0 z-10 flex bg-black px-5">
