@@ -3,6 +3,78 @@ import "@styles/global.css";
 
 import Navbar from "@components/navbar.astro";
 import Footer from "@components/footer.astro";
+
+const EXPERIENCE = [
+	{
+		role: "Founding Engineer",
+		company: "Avatar Cam",
+		date: "2021-Present",
+		tagline: "Designing expressive, real-time avatar tools for creators.",
+		visualMode: "avatar-cam",
+		tech: ["C++", "ImGui", "Twitch API"],
+		narrative: [
+			"Commission-based software to display controllable and interactive avatars for creators.",
+			"Built a layering system and customizable actions so artists can create sophisticated cam setups without touching code.",
+			"Integrated non-deterministic lip-sync and Twitch-driven events to keep streams feeling alive and reactive.",
+		],
+	},
+	{
+		role: "Class Mentor (Intro to Programming)",
+		company: "Code the Dream",
+		date: "Sep 2022-Feb 2023",
+		tagline: "Guiding new developers through their first real codebases.",
+		visualMode: "teaching",
+		tech: ["HTML", "CSS", "JavaScript"],
+		narrative: [
+			"Mentored a small cohort of students through weekly sessions on web fundamentals.",
+			"Provided 1:1 assistance, code reviews, and unblockers so students could ship real projects.",
+		],
+	},
+];
+
+const PROJECTS = [
+	{
+		name: "Fast Olympic Coding for VSCode",
+		tagline: "High-performance competitive programming extension",
+		tech: ["TypeScript", "Preact", "TailwindCSS"],
+		link: "https://github.com/celonymire/vscode-fastolympiccoding",
+		description: "A VSCode extension to automate labor-intensive tasks within competitive programming setting.",
+		bullets: [
+			"Optimized rapid IO communications with asynchronous design and batching to at most 5ms.",
+			"Compatibility with Competitive Companion to seamlessly fetch problem or contest data.",
+			"Used Preact and TailwindCSS to minimize extension size by 80% and leveraging Preact Signals to bypass virtual DOM updates for hot spots.",
+		],
+	},
+	{
+		name: "Competitive Programming Collection",
+		tagline: "Battle tested algorithms library",
+		tech: ["C++17", "CMake", "Testing"],
+		link: "https://github.com/celonymire/competitive-programming",
+		description: "A collection of data structures and algorithms used within programming contests in C++17.",
+		bullets: [
+			"Utilized generic abstractions to allow maximum customization and manage complex dependencies.",
+			"Includes a randomized stress testing suite that executes every commit to ensure valid compilation and correct implementation.",
+		],
+	},
+];
+
+const OPEN_SOURCE = [
+	{
+		repo: "microsoft/STL",
+		bullets: [
+			"Implemented several C++23 features related to std::string_view.",
+			"Enhanced the STL with various LWG resolutions and added user-friendly warnings for best practices.",
+			"Created a GitHub automation to allow pull request authors to manage their PR statuses.",
+		],
+	},
+	{
+		repo: "libsdl-org/SDL",
+		bullets: [
+			"Added support for transparent window backgrounds on Windows.",
+			"Fixed misleading behavior with file dialogs on Windows.",
+		],
+	},
+];
 ---
 
 <!doctype html>
@@ -26,7 +98,237 @@ import Footer from "@components/footer.astro";
 	</head>
 	<body>
 		<Navbar currentPageTitle="ABOUT" />
-		<main id="main-content"></main>
+		<main id="main-content">
+			<section id="intro" class="bg-black px-40 py-20 text-white">
+				<div class="mx-auto flex max-w-7xl items-center gap-20">
+					<div class="flex-1">
+						<h1 class="mb-10 text-5xl font-extrabold">About Me</h1>
+						<p class="mb-6 text-xl/8 font-light tracking-wide">
+							I am a self-taught with significant open-source contributions, experience developing commercial software,
+							and a strong background in competitive programming. I enjoy participating in coding contests and building
+							applications to learn and solve problems.
+						</p>
+						<p class="mb-6 text-xl/8 font-light tracking-wide">
+							I started coding when I was around 13 years old, with Java as my first language. I watched <a
+								href="https://www.youtube.com/user/thenewboston"
+								class="text-blue-400 underline hover:text-blue-300">thenewboston</a
+							> tutorials on YouTube to learn the basics and gradually expanded my skills. My first funny reason for liking
+							coding was because the syntax highlighting and the Eclipse IDE looked very cool and foreign. Coding became
+							a daily thought and I kept practicing, by building toy projects and exploring various fields.
+						</p>
+						<p class="text-xl/8 font-light tracking-wide">
+							As of now, I am exploring mathematics, computer science, and artificial intelligence. I will be going to
+							university in 2026 for Bachelor of Science, then major in Computer Science.
+						</p>
+					</div>
+					<div class="flex w-[400px] shrink-0 flex-wrap justify-center gap-6 opacity-80">
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+							alt="C++"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+							alt="TypeScript"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+							alt="JavaScript"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+							alt="Python"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+							alt="Java"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+							alt="React"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+							alt="Node.js"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+							alt="Git"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+							alt="VS Code"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cmake/cmake-original.svg"
+							alt="CMake"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+							alt="Tailwind CSS"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+						<img
+							src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+							alt="HTML5"
+							class="h-16 w-16 transition-transform hover:scale-110"
+						/>
+					</div>
+				</div>
+			</section>
+			<section id="experience" class="bg-gray-900 px-40 py-24 text-white">
+				<h2 class="mb-16 text-center text-4xl font-extrabold">Experience</h2>
+				<div class="mx-auto flex max-w-6xl gap-16">
+					{/* Timeline column */}
+					<div class="relative w-2/5">
+						<div class="absolute inset-y-0 left-2.5 w-px bg-gray-700" aria-hidden="true"></div>
+						<ul class="space-y-12">
+							{
+								EXPERIENCE.map((job, index) => (
+									<li class="relative cursor-pointer">
+										<div class="flex items-start gap-6">
+											<div class="relative z-10 flex h-5 w-5 translate-y-1 items-center justify-center rounded-full border-2 border-blue-400 bg-gray-900 shadow-[0_0_12px_rgba(96,165,250,0.6)]" />
+											<div class="flex-1">
+												<p class="text-sm tracking-wide text-gray-400 uppercase">{job.date}</p>
+												<h3 class="text-lg font-bold">{job.role}</h3>
+												<p class="text-sm text-gray-300">{job.company}</p>
+												<p class="mt-2 text-sm text-gray-400">{job.tagline}</p>
+											</div>
+										</div>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+
+					{/* Visual detail panel */}
+					<div class="w-3/5">
+						{
+							EXPERIENCE.map((job, index) => (
+								<div class="mb-10 rounded-2xl border border-gray-700 bg-linear-to-br from-gray-900/90 via-gray-900 to-gray-800 p-8 shadow-[0_18px_45px_rgba(0,0,0,0.55)] last:mb-0">
+									<div class="mb-4 flex items-baseline justify-between gap-4">
+										<div>
+											<h3 class="text-2xl font-bold">{job.company}</h3>
+											<p class="text-sm tracking-wide text-blue-300 uppercase">{job.role}</p>
+										</div>
+										<p class="text-sm text-gray-400">{job.date}</p>
+									</div>
+									<p class="mb-4 text-base text-gray-200">{job.tagline}</p>
+									<ul class="mb-6 space-y-2 text-sm text-gray-300">
+										{job.narrative.map((line) => (
+											<li>• {line}</li>
+										))}
+									</ul>
+									{job.tech && (
+										<div class="flex flex-wrap gap-2">
+											{job.tech.map((tech) => (
+												<span class="rounded-full border border-blue-500/60 bg-blue-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-blue-200">
+													{tech}
+												</span>
+											))}
+										</div>
+									)}
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section id="projects" class="bg-black px-40 py-20 text-white">
+				<h2 class="mb-16 text-center text-4xl font-extrabold">Projects</h2>
+				<div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2">
+					{
+						PROJECTS.map((project) => (
+							<a
+								href={project.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="block rounded-2xl border border-gray-800/60 bg-linear-to-br from-black via-gray-950 to-gray-900 p-8 shadow-[0_18px_45px_rgba(0,0,0,0.75)] transition-all hover:border-blue-500/40 hover:shadow-[0_20px_50px_rgba(59,130,246,0.15)]"
+							>
+								<div class="mb-4">
+									<h3 class="mb-1 text-2xl font-bold">{project.name}</h3>
+									<p class="text-sm tracking-wide text-blue-300 uppercase">{project.tagline}</p>
+								</div>
+								<p class="mb-4 text-base text-gray-200">{project.description}</p>
+								<ul class="mb-6 space-y-2 text-sm text-gray-300">
+									{project.bullets.map((bullet) => (
+										<li>• {bullet}</li>
+									))}
+								</ul>
+								{project.tech && (
+									<div class="flex flex-wrap gap-2">
+										{project.tech.map((tech) => (
+											<span class="rounded-full border border-blue-500/60 bg-blue-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-blue-200">
+												{tech}
+											</span>
+										))}
+									</div>
+								)}
+							</a>
+						))
+					}
+				</div>
+			</section>
+
+			<section id="opensource" class="bg-blue-950 px-40 py-20 text-white">
+				<h2 class="mb-16 text-center text-4xl font-extrabold">Open Source</h2>
+				<div class="mx-auto max-w-4xl space-y-8">
+					{
+						OPEN_SOURCE.map((os) => (
+							<div>
+								<h3 class="mb-3 text-xl font-bold">{os.repo}</h3>
+								<ul class="ml-5 list-outside list-disc space-y-2 text-blue-100">
+									{os.bullets.map((bullet) => (
+										<li>{bullet}</li>
+									))}
+								</ul>
+							</div>
+						))
+					}
+				</div>
+			</section>
+		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	/* Page-scoped CSS (moved here to keep a single style block in the page) */
+	/* Scope variables and base font settings to the main content container */
+	#main-content {
+		--font-sans:
+			"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+		--font-heading: "Poppins", var(--font-sans);
+		--max-read-width: 60ch;
+		font-family: var(--font-sans);
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 1.5;
+		color: #e5e7eb;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Headings in this page use the heading font */
+	#main-content h1,
+	#main-content h2,
+	#main-content h3,
+	#main-content h4,
+	#main-content h5,
+	#main-content h6,
+	#main-content .font-extrabold {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		letter-spacing: -0.01em;
+	}
+</style>

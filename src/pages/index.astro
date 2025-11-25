@@ -97,17 +97,21 @@ const DSA_COLLECTION = [
 			<section
 				id="dsa-collection"
 				aria-labelledby="dsa-heading"
-				class="relative gap-48 overflow-hidden bg-gray-800 px-40 py-10"
+				class="relative gap-48 overflow-hidden bg-black px-40 py-10"
 			>
 				<h1 id="dsa-heading" class="mb-10 text-center text-5xl font-extrabold text-white">Personal DSA Collection</h1>
-				<ul class="mb-10 flex flex-wrap justify-center gap-12 text-white">
+				<ul class="mb-10 flex flex-wrap justify-center gap-6 text-white">
 					{
 						DSA_COLLECTION.map((item) => (
-							<li class="dsa-item max-w-[350px] min-w-[200px] rounded-lg p-3 transition-colors duration-250 ease-in-out">
-								<a class="text-xl font-extrabold" href={item.link} aria-label={item.name + " (DSA resource)"}>
+							<li class="dsa-item group max-w-[350px] min-w-[280px] rounded-xl border border-gray-800/60 bg-linear-to-br from-black via-gray-950 to-gray-900 p-5 shadow-[0_4px_12px_rgba(0,0,0,0.4)] transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-blue-400/40 hover:shadow-[0_8px_24px_rgba(96,165,250,0.25)]">
+								<a
+									class="text-xl font-bold text-white group-hover:text-blue-400"
+									href={item.link}
+									aria-label={item.name + " (DSA resource)"}
+								>
 									{item.name}
 								</a>
-								<p class="mt-2 text-sm leading-snug">{item.description}</p>
+								<p class="mt-3 text-sm/relaxed text-gray-300">{item.description}</p>
 							</li>
 						))
 					}
@@ -276,10 +280,22 @@ const DSA_COLLECTION = [
 		position: absolute;
 		inset: 0;
 		background-image:
-			repeating-linear-gradient(45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px),
-			repeating-linear-gradient(-45deg, #1f2937 0px, #1f2937 20px, #374151 20px, #374151 40px);
+			repeating-linear-gradient(
+				45deg,
+				transparent 0px,
+				transparent 20px,
+				rgba(255, 255, 255, 0.02) 20px,
+				rgba(255, 255, 255, 0.02) 40px
+			),
+			repeating-linear-gradient(
+				-45deg,
+				transparent 0px,
+				transparent 20px,
+				rgba(255, 255, 255, 0.02) 20px,
+				rgba(255, 255, 255, 0.02) 40px
+			);
 		background-blend-mode: multiply;
-		opacity: 0.6;
+		opacity: 1;
 		pointer-events: none;
 		z-index: 0;
 	}
@@ -307,20 +323,7 @@ const DSA_COLLECTION = [
 		z-index: 1;
 	}
 
-	/* DSA item hover and transitions — scoped and specific so it overrides page-level rules */
-	#main-content .dsa-item:hover {
-		background-color: white;
-	}
-
-	#main-content .dsa-item a,
-	#main-content .dsa-item p {
-		transition: color 0.25s ease;
-	}
-
-	#main-content .dsa-item:hover a,
-	#main-content .dsa-item:hover p {
-		color: black;
-	}
+	/* DSA cards now use gradient background and hover effects via Tailwind classes */
 
 	@keyframes move-gradient {
 		0% {
